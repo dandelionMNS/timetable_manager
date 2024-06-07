@@ -14,6 +14,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="{{asset('styles.css')}}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
