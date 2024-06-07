@@ -1,0 +1,29 @@
+p{
+    max-width: 60ch;
+}
+
+.btn{
+    background: none;
+    padding: 5px 20px;
+    color: #818cf8;
+    border: #818cf8 1px solid;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 200ms;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background: #818cf8;
+    color: white;
+}
+
+thead td{
+    padding: 15px 20px;
+}
+
+tbody td{
+    padding: 15px 20px;
+    border-top: #0002 solid 1px;
+    border-collapse: collapse;
+}
