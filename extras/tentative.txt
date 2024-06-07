@@ -1,0 +1,98 @@
+CRUD - db_table, model, controller, route
+UI - interface & function
+
+Module 1:
+
+- system design/planning
+- User CRUD (all users)
+- Subject CRUD (subject)
+- Course CRUD (class)
+- ClassRoom CRUD (location)
+- Batch CRUD (batch)
+
+UI:
+- Admin - empty dashboard
+- Teacher/Student - register
+- Teacher/Student - empty dashboard 
+
+
+Module 2:
+- Assigned_class CRUD
+- Class_Student CRUD
+
+UI:
+- Admin - Update Teacher/Student information
+- Admin - Register subject(bind with course and batch/semester)
+- Admin - Asign teacher to teach subject (Assigned_Class) 
+- Admin - Asign student to join assigned class (Class_Student)
+
+- Admin - Update Dashboard: include,
+		- List of Students
+		- List of Teachers
+
+
+Module 3:
+
+- Table generator
+- Student - Display enrolled subject timetable
+- Teacher - Display asigned class to teach
+
+
+=======================================================
+ Database Update: Phase 1 - Base
+=======================================================
+
+User:
+- id
+- name
+- user_type (admin/teacher/student)
+- matric_no
+- email
+- phone_no
+- batch_id
+- course_id
+
+
+Subject: 
+- id
+- name (Sejarah)
+- code (SEJ)
+- course_id (FK Course: id)
+- credit_hour
+
+
+ClassRoom:
+- id
+- name (location)
+
+Course:
+- id
+- code (S1, SS2, AA3)
+- batch_id (FK Batch: id)
+
+
+Batch:
+- id
+- intake
+- semester (year count)
+- credit_hour (total credit hour needed)
+
+
+==============================================================
+ Database Update: Phase 2 - Bridge
+==============================================================
+
+Assigned_Class:
+- id
+- instructor (FK user: id)
+- location (FK classroom: id)
+- day
+- time start
+- time end
+
+Class_Student:
+- id
+- assigned_class_id (FK Assigned_Class: id)
+- student (FK Assigned_Class: id)
+
+==============================================================
