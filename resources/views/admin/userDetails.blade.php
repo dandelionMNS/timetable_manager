@@ -35,7 +35,7 @@
                         <label for="matric_no">
                             Matric No:
                         </label>
-                        <input type="text" id="matric_no" name="matric_no" value="{{ $user->matric_no }}" >
+                        <input type="text" id="matric_no" name="matric_no" value="{{ $user->matric_no }}">
                     </div>
 
                     <div>
@@ -49,7 +49,7 @@
                         <label for="phone_no">
                             Phone No:
                         </label>
-                        <input type="text" id="phone_no" name="phone_no" value="{{ $user->phone_no }}" >
+                        <input type="text" id="phone_no" name="phone_no" value="{{ $user->phone_no }}">
                     </div>
 
                     <div>
@@ -86,14 +86,16 @@
                         <div class="flex w-full gap-2" style="flex-direction: row">
                             <input type="submit" value="Update">
 
-                            <form class="w-fit" method="DELETE" action="{{route('user.delete', ['id' => $user->id])}}">
-                                @csrf
-                                @method('DELETE')
-                                <input class="btn dlt" type="submit" value="Remove User">
-                            </form>
+
 
                         </div>
 
+                </form>
+
+                <form class="w-fit pt-3" method="DELETE" action="{{route('user.delete', ['id' => $user->id])}}">
+                    @csrf
+                    @method('DELETE')
+                    <input class="btn dlt" type="submit" value="Remove User">
                 </form>
 
             </div>
