@@ -46,7 +46,6 @@ class UserController extends Controller
         $user->phone_no = $request->input('phone_no');
         $user->batch_id = $request->input('batch_id');
         $user->matric_no = $request->input('matric_no');
-        $user->name = $request->input('name');
         $user->save();
 
      
