@@ -11,7 +11,7 @@
                 <table class="w-full">
                     <thead>
                         <td class="w-min">No.</td>
-                        <td class="w-min">ID</td>
+                        <td class="w-min">User Type</td>
                         <td class="w-min text-nowrap">Matrix No</td>
                         <td class="w-full">Name</td>
                         <td></td>
@@ -21,20 +21,22 @@
                             <?= $counter=1 ?>
                         </div>
                         @foreach ($users as $user)
-                            <tr>
-                                <td>
-                                    <?= $counter++ ?>
-                                </td>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->matric_no}}</td>
-                                <td>{{$user->name}}</td>
-                                <td style="padding: 15px 30px">
-                                    <a class="btn">
-                                        Update
-                                    </a>
-                                </td>
+                            @if ($user->user_type != 'admin')
+                                <tr>
+                                    <td>
+                                        <?= $counter++ ?>
+                                    </td>
+                                    <td>{{$user->user_type}}</td>
+                                    <td>{{$user->matric_no}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td style="padding: 15px 30px">
+                                        <a href="{{route('user.details', ['id' => $user->id])}}" class="btn">
+                                            Update
+                                        </a>
+                                    </td>
 
-                            </tr>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

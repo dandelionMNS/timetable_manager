@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
 // Users related routes
 {
     Route::get('/user', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('user.index');
+    Route::get('/user/{id}', [UserController::class, 'userDetail'])->middleware(['auth', 'verified'])->name('user.details');
+    Route::put('/user/{id}/update', [UserController::class, 'userUpdate'])->middleware(['auth', 'verified'])->name('user.update');
+    Route::delete('/user/{id}/update', [UserController::class, 'userDelete'])->middleware(['auth', 'verified'])->name('user.delete');
 }
 
 // Subjects related routes

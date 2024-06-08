@@ -24,18 +24,42 @@ class UserController extends Controller
              return view('welcome');
          }
      }
- 
-     public function updateUser(ProfileUpdateRequest $request): RedirectResponse
+
+     public function userDetail($id)
      {
-         $request->user()->fill($request->validated());
+         $user = User::findOrFail($id);        
+         return view('admin.userDetails', compact("user"));
+     }
  
-         if ($request->user()->isDirty('email')) {
-             $request->user()->email_verified_at = null;
-         }
  
-         $request->user()->save();
- 
-         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+     public function userUpdate(Request $request, $id)
+     {
+
+        if(!User::findOrFail($id)){
+            return view("dashboard");
+        }
+        
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->user_type = $request->input('user_type');
+        $user->phone_no = $request->input('phone_no');
+        $user->batch_id = $request->input('batch_id');
+        $user->matric_no = $request->input('matric_no');
+        $user->name = $request->input('name');
+        $user->save();
+
+     
+         return view('admin.userDetails', compact('user'));
+     }
+
+     public function userDelete($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        $users = User::all();
+        return view('admin.user', compact('users'));
+
      }
  
 }

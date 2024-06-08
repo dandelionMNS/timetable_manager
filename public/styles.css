@@ -1,8 +1,9 @@
-p{
+p {
     max-width: 60ch;
 }
 
-.btn{
+.btn,
+[type="submit"] {
     background: none;
     padding: 5px 20px;
     color: #818cf8;
@@ -10,20 +11,48 @@ p{
     border-radius: 5px;
     text-decoration: none;
     transition: 200ms;
+
+    width: fit-content;
 }
 
-.btn:hover{
+.btn:hover,
+[type="submit"]:hover {
     cursor: pointer;
     background: #818cf8;
     color: white;
 }
 
-thead td{
+.dlt {
+    border: #f00 solid 1px;
+    color: #f00;
+
+    &:hover{
+        background-color: #f00;
+        color: white;
+    }
+}
+
+thead td {
     padding: 15px 20px;
 }
 
-tbody td{
+tbody td {
     padding: 15px 20px;
     border-top: #0002 solid 1px;
     border-collapse: collapse;
+}
+
+input[type="text"],
+input[type="email"],
+.input {
+    background: white;
+    border: 1px #0005 solid;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.user-form div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
