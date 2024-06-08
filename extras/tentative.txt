@@ -56,6 +56,7 @@ User:
 Subject: 
 - id
 - name (Sejarah)
+- instructor (FK user: id)
 - code (SEJ)
 - course_id (FK Course: id)
 - credit_hour
@@ -68,7 +69,7 @@ ClassRoom:
 Course:
 - id
 - code (S1, SS2, AA3)
-- batch_id (FK Batch: id)
+- semester
 
 
 Batch:
@@ -84,7 +85,6 @@ Batch:
 
 Assigned_Class:
 - id
-- instructor (FK user: id)
 - location (FK classroom: id)
 - day
 - time start

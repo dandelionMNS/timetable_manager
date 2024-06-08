@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,17 +25,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('user.index');
     Route::get('/user/{id}', [UserController::class, 'userDetail'])->middleware(['auth', 'verified'])->name('user.details');
     Route::put('/user/{id}/update', [UserController::class, 'userUpdate'])->middleware(['auth', 'verified'])->name('user.update');
-    Route::delete('/user/{id}/update', [UserController::class, 'userDelete'])->middleware(['auth', 'verified'])->name('user.delete');
+    Route::delete('/user/{id}/delete', [UserController::class, 'userDelete'])->middleware(['auth', 'verified'])->name('user.delete');
 }
 
 // Subjects related routes
 {
-    Route::get('/subject', function(){return view('admin.subject');})->middleware(['auth', 'verified'])->name('subject.index');
+    Route::get('/subject', function () {
+        return view('admin.subject'); })->middleware(['auth', 'verified'])->name('subject.index');
 }
 
-// Users related routes
+// Classsroom related routes
 {
-    Route::get('/classroom', function(){return view('admin.classroom');})->middleware(['auth', 'verified'])->name('classroom.index');
+    Route::get('/classroom', [ClassroomController::class, 'index'])->middleware(['auth', 'verified'])->name('classroom.index');
+    Route::post('/classroom/add', [ClassroomController::class, 'classroomAdd'])->middleware(['auth', 'verified'])->name('classroom.add');
+    Route::put('/classroom/{id}/update', [ClassroomController::class, 'classroomUpdate'])->middleware(['auth', 'verified'])->name('classroom.update');
+    Route::delete('/classroom/{id}/delete', [ClassroomController::class, 'classroomDelete'])->middleware(['auth', 'verified'])->name('classroom.delete');
+
 }
 
 
