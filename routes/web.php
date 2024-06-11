@@ -4,6 +4,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,8 +33,11 @@ Route::middleware('auth')->group(function () {
 
 // Subjects related routes
 {
-    Route::get('/subject', function () {
-        return view('admin.subject'); })->middleware(['auth', 'verified'])->name('subject.index');
+        Route::get('/subject', [SubjectController::class, 'index'])->middleware(['auth', 'verified'])->name('subject.index');
+        Route::post('/subject/add', [SubjectController::class, 'subjectAdd'])->middleware(['auth', 'verified'])->name('subject.add');
+        Route::put('/subject/{id}/update', [SubjectController::class, 'subjectUpdate'])->middleware(['auth', 'verified'])->name('subject.update');
+        Route::delete('/subject/{id}/delete', [SubjectController::class, 'subjectDelete'])->middleware(['auth', 'verified'])->name('subject.delete');
+    
 }
 
 // Classsroom related routes
@@ -62,7 +66,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/batch/{id}/delete', [BatchController::class, 'batchDelete'])->middleware(['auth', 'verified'])->name('batch.delete');
 
 }
-
-
 
 require __DIR__ . '/auth.php';
