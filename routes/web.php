@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/course/add', [CourseController::class, 'courseAdd'])->middleware(['auth', 'verified'])->name('course.add');
     Route::put('/course/{id}/update', [CourseController::class, 'courseUpdate'])->middleware(['auth', 'verified'])->name('course.update');
     Route::delete('/course/{id}/delete', [CourseController::class, 'courseDelete'])->middleware(['auth', 'verified'])->name('course.delete');
+
+}
+
+// Batch related routes
+{
+    Route::get('/batch', [BatchController::class, 'index'])->middleware(['auth', 'verified'])->name('batch.index');
+    Route::post('/batch/add', [BatchController::class, 'batchAdd'])->middleware(['auth', 'verified'])->name('batch.add');
+    Route::put('/batch/{id}/update', [BatchController::class, 'batchUpdate'])->middleware(['auth', 'verified'])->name('batch.update');
+    Route::delete('/batch/{id}/delete', [BatchController::class, 'batchDelete'])->middleware(['auth', 'verified'])->name('batch.delete');
 
 }
 
