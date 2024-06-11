@@ -9,7 +9,7 @@ class BatchController extends Controller
 {
     public function index()
     {
-        $batches = Batch::orderBy('semester', 'asc')->get();
+        $batches = Batch::orderByRaw('ISNULL(semester), semester ASC')->get();
         return view("admin.batch", compact("batches"));
     }
 
@@ -21,7 +21,7 @@ class BatchController extends Controller
         $batch->intake = $request->input("intake");
         $batch->save();
 
-         $batches = Batch::orderBy('semester', 'asc')->get();
+         $batches = Batch::orderByRaw('ISNULL(semester), semester ASC')->get();
         return view("admin.batch", compact("batches"));
     }
 
@@ -32,7 +32,7 @@ class BatchController extends Controller
        $batch->intake = $request->input("intake");
        $batch->save();   
        
-        $batches = Batch::orderBy('semester', 'asc')->get();
+        $batches = Batch::orderByRaw('ISNULL(semester), semester ASC')->get();
        return view('admin.batch', compact('batches'));
     }
 
@@ -40,7 +40,7 @@ class BatchController extends Controller
         $batch = Batch::findOrFail($id);
         $batch->delete();
 
-        $batches = Batch::orderBy('semester', 'asc')->get();
+        $batches = Batch::orderByRaw('ISNULL(semester), semester ASC')->get();
         return view('admin.batch', compact('batches'));
      }
 }
