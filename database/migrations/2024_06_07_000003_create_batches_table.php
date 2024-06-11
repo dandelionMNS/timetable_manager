@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->string('intake');
-            $table->integer('semester');
-            $table->integer('credit_hour');
+            $table->integer('semester')->nullable();
         });
     }
 
