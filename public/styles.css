@@ -32,11 +32,8 @@ p {
     }
 }
 
-thead td {
-    padding: 15px 20px;
-}
 
-tbody td {
+tbody td, thead td {
     padding: 15px 20px;
     border-top: #0002 solid 1px;
     border-collapse: collapse;

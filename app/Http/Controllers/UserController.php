@@ -59,6 +59,5 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.user', compact('users'));
 
-     }
- 
+     } 
 }
