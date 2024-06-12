@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Assigned_ClassController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CourseController;
@@ -66,5 +67,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/batch/{id}/delete', [BatchController::class, 'batchDelete'])->middleware(['auth', 'verified'])->name('batch.delete');
 
 }
+
+// Assigned_Class(ac) related routes
+{
+    Route::get('/course/{id}/ac', [Assigned_ClassController::class, 'index'])->middleware(['auth', 'verified'])->name('ac.index');
+    Route::post('/course/{id}/ac/add', [Assigned_ClassController::class, 'acAdd'])->middleware(['auth', 'verified'])->name('ac.add');
+    Route::put('/course/{id}/ac/{ac_id}/update', [Assigned_ClassController::class, 'acUpdate'])->middleware(['auth', 'verified'])->name('ac.update');
+    Route::delete('/course/{id}/ac/{ac_id}/delete', [Assigned_ClassController::class, 'acDelete'])->middleware(['auth', 'verified'])->name('ac.delete');
+
+}
+
 
 require __DIR__ . '/auth.php';

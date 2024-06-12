@@ -58,7 +58,7 @@
                             <td>No.</td>
                             <td>Code</td>
                             <td>Semester</td>
-                            <td></td>
+                            <td colspan="3"></td>
                         </tr>
                         @foreach ($courses as $course)
                             <tr>
@@ -81,7 +81,12 @@
                                 <td class="gap-3 flex">
                                     <input type="submit" value="Update">
                                     </form>
+                                </td>
+                                <td>
+                                    <a class="btn text-nowrap h-full text-lg" href="{{route('ac.index')}}">Assigning Class</a>
+                                </td>
 
+                                <td>
                                     <form class="w-fit" method="POST"
                                         action="{{ route('course.delete', ['id' => $course->id]) }}">
 
