@@ -31,7 +31,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            List of Courses
+            Assigned Class for {{$course->id}} Semester {{$course->semester}}
         </h2>
     </x-slot>
 
@@ -40,14 +40,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center">
                 <div class="w-full p-10 flex justify-center flex-wrap">
 
-                    <form id="newCourse" class="flex gap-3" method="POST" action="{{ route('course.add')}}">
-                        @csrf
-                        <input style="border: 2px solid #818cf8 !important" type="text" name="code"
-                            placeholder="Code: CS230" required>
-                        <input style="border: 2px solid #818cf8 !important" type="text" name="semester"
-                            placeholder="Semester: 1" required>
-                        <input type="submit" value="Add Course" class=" add-btn flex justify-center items-center">
-                    </form>
+                    <a href="{{route('ac.addPage', ['c_id' => $course->id])}}" class="btn "> Assgining new class</a>
                 </div>
                 <table class="w-11/12">
                     <tbody>
@@ -56,40 +49,30 @@
                         </div>
                         <tr>
                             <td>No.</td>
-                            <td>Code</td>
-                            <td>Semester</td>
-                            <td colspan="3"></td>
+                            <td>Subject</td>
+                            <td>Instructor</td>
+                            <td>Location</td>
                         </tr>
-                        @foreach ($courses as $course)
+                        @foreach ($assigned_classes as $assigned_class)
                             <tr>
                                 <td class="w-min">
                                     {{ $loop->iteration }}
                                 </td>
 
                                 <td>
-                                    <form class="flex w-full gap-3" method="POST"
-                                        action="{{ route('course.update', $course->id)}}">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="text" name="code" value="{{$course->code}}" required>
+                                    {{$assigned_class->subject->name}}
                                 </td>
 
                                 <td class="w-full">
-                                    <input type="text" name="semester" value="{{$course->semester}}" required>
+                                    {{$assigned_class->instructor->name}}
                                 </td>
 
                                 <td class="gap-3 flex">
-                                    <input type="submit" value="Update">
-                                    </form>
-                                </td>
-                                <td>
-                                    <a class="btn text-nowrap h-full text-lg" href="{{route('ac.index',['c_id'=>$course->id])}}">Assigning Class</a>
                                 </td>
 
                                 <td>
                                     <form class="w-fit" method="POST"
-                                        action="{{ route('course.delete', ['id' => $course->id]) }}">
-
+                                        action="{{ route('ac.testDelete', ['id' => $assigned_class->id, 'c_id' => $course->id])}}">
                                         @csrf
                                         @method('DELETE')
                                         <input class="btn dlt" type="submit" value="Remove">

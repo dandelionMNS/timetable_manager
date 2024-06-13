@@ -43,8 +43,17 @@ INSERT INTO `subjects` (`id`, `name`, `code`, `credit_hour`) VALUES
 (9, 'English Language', 'ENG', 3),
 (10, 'Mathematics', 'MAT', 3),
 (11, 'Additional Mathematics', 'AMT', 3),
-(12, 'Calculus', 'CAL', 3),
+(12, 'Calculus - I', 'CAL-I', 3),
 (13, 'Physics', 'PHY', 3),
 (14, 'Biology', 'BIO', 3),
-(15, 'Chemistry', 'CHM', 3),
-(16, 'Chemistry', 'CHM', 3);
+(18, 'Chemistry', 'CHM', 3),
+(19, 'Calculus II', 'CAL-II', 3);
+
+INSERT INTO `days` (`id`, `name`) VALUES
+(1, 'Sunday'),
+(2, 'Monday'),
+(3, 'Tuesday'),
+(4, 'Wednesday'),
+(5, 'Thursday'),
+(6, 'Friday'),
+(7, 'Saturday');

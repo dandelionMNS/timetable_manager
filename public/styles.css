@@ -26,14 +26,14 @@ p {
     border: #f00 solid 1px;
     color: #f00;
 
-    &:hover{
+    &:hover {
         background-color: #f00;
         color: white;
     }
 }
 
-
-tbody td, thead td {
+tbody td,
+thead td {
     padding: 15px 20px;
     border-top: #0002 solid 1px;
     border-collapse: collapse;
@@ -41,11 +41,14 @@ tbody td, thead td {
 
 input[type="text"],
 input[type="email"],
+input[type="time"],
+input[type="date"],
+select,
 .input {
     background: white;
     border: 1px #0005 solid;
     border-radius: 12px;
-    padding: 10px;
+    padding: 10px !important;
 }
 
 .user-form div {
