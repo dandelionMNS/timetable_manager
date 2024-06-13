@@ -48,3 +48,12 @@ INSERT INTO `subjects` (`id`, `name`, `code`, `credit_hour`) VALUES
 (14, 'Biology', 'BIO', 3),
 (18, 'Chemistry', 'CHM', 3),
 (19, 'Calculus II', 'CAL-II', 3);
+
+INSERT INTO `days` (`id`, `name`) VALUES
+(1, 'Sunday'),
+(2, 'Monday'),
+(3, 'Tuesday'),
+(4, 'Wednesday'),
+(5, 'Thursday'),
+(6, 'Friday'),
+(7, 'Saturday');

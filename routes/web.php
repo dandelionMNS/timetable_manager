@@ -70,10 +70,12 @@ Route::middleware('auth')->group(function () {
 
 // Assigned_Class(ac) related routes
 {
-    Route::get('/course/{id}/ac', [Assigned_ClassController::class, 'index'])->middleware(['auth', 'verified'])->name('ac.index');
-    Route::post('/course/{id}/ac/add', [Assigned_ClassController::class, 'acAdd'])->middleware(['auth', 'verified'])->name('ac.add');
-    Route::put('/course/{id}/ac/{ac_id}/update', [Assigned_ClassController::class, 'acUpdate'])->middleware(['auth', 'verified'])->name('ac.update');
-    Route::delete('/course/{id}/ac/{ac_id}/delete', [Assigned_ClassController::class, 'acDelete'])->middleware(['auth', 'verified'])->name('ac.delete');
+    Route::get('/course/{c_id}/ac', [Assigned_ClassController::class, 'index'])->middleware(['auth', 'verified'])->name('ac.index');
+    Route::get('/course/{c_id}/ac/add', [Assigned_ClassController::class, 'acAddPage'])->middleware(['auth', 'verified'])->name('ac.addPage');
+    Route::post('/course/{c_id}/ac/add/create', [Assigned_ClassController::class, 'acAdd'])->middleware(['auth', 'verified'])->name('ac.add');
+    Route::put('/course/{c_id}/ac/{id}/update', [Assigned_ClassController::class, 'acUpdate'])->middleware(['auth', 'verified'])->name('ac.update');
+    Route::delete('/course/{c_id}/ac/{id}/delete', [Assigned_ClassController::class, 'ac'])->middleware(['auth', 'testDelete'])->name('ac.testDelete');
+    Route::delete('/course/{c_id}/ac/delete/{id}', [Assigned_ClassController::class, 'acDelete'])->middleware(['auth', 'verified'])->name('ac.delete');
 
 }
 
