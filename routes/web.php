@@ -5,6 +5,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -68,16 +69,15 @@ Route::middleware('auth')->group(function () {
 
 }
 
-// Assigned_Class(ac) related routes
+// Schedule related routes
 {
-    Route::get('/course/{c_id}/ac', [Assigned_ClassController::class, 'index'])->middleware(['auth', 'verified'])->name('ac.index');
-    Route::get('/course/{c_id}/ac/add', [Assigned_ClassController::class, 'acAddPage'])->middleware(['auth', 'verified'])->name('ac.addPage');
-    Route::post('/course/{c_id}/ac/add/create', [Assigned_ClassController::class, 'acAdd'])->middleware(['auth', 'verified'])->name('ac.add');
-    Route::put('/course/{c_id}/ac/{id}/update', [Assigned_ClassController::class, 'acUpdate'])->middleware(['auth', 'verified'])->name('ac.update');
-    Route::delete('/course/{c_id}/ac/{id}/delete', [Assigned_ClassController::class, 'ac'])->middleware(['auth', 'testDelete'])->name('ac.testDelete');
-    Route::delete('/course/{c_id}/ac/delete/{id}', [Assigned_ClassController::class, 'acDelete'])->middleware(['auth', 'verified'])->name('ac.delete');
+    Route::get('/schedule', [ScheduleController::class, 'index'])->middleware(['auth', 'verified'])->name('schedule.index');
+    Route::get('/schedule/add', [ScheduleController::class, 'scheduleAddPage'])->middleware(['auth', 'verified'])->name('schedule.addPage');
+    Route::post('/schedule/added', [ScheduleController::class, 'scheduleAdd'])->middleware(['auth', 'verified'])->name('schedule.add');
+    Route::get('/schedule/{id}/update', [ScheduleController::class, 'scheduleUpdatePage'])->middleware(['auth', 'verified'])->name('schedule.updatePage');
+    Route::put('/schedule/{id}/updated', [ScheduleController::class, 'scheduleUpdate'])->middleware(['auth', 'verified'])->name('schedule.update');
+    Route::delete('/schedule/{id}/delete', [ScheduleController::class, 'scheduleDelete'])->middleware(['auth', 'verified'])->name('schedule.delete');
 
 }
-
 
 require __DIR__ . '/auth.php';
