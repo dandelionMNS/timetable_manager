@@ -18,11 +18,13 @@
                         <label for="course_id">
                             Course:
                         </label>
+
                         <select class="w-full" id="course_id" name="course_id">
                             @foreach ($courses as $course)
-                                <option value="{{$course->id}}">{{$course->code}}</option>
+                                <option value="{{$course->id}}">{{$course->code}} - S{{$course->semester}}</option>
                             @endforeach
                         </select>
+                        
                     </div>
 
                     <div class="pb-3">

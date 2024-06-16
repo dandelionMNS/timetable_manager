@@ -16,6 +16,10 @@
         <script src="https://cdn.tailwindcss.com"></script>      
           
         <link rel="stylesheet" href="{{asset('styles.css')}}" />
+
+        <!-- Timetable -->
+        <link rel="stylesheet" href="timetablejs.css">
+        <script src="timetable.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

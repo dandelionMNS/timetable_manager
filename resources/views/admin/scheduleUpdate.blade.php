@@ -23,7 +23,7 @@
                         <select class="w-full" id="course_id" name="course_id">
                             @foreach ($courses as $course)
                                 <option value="{{$course->id}}" {{$course->id == $schedule->course->id ? 'selected' : '' }}>
-                                    {{$course->code}}
+                                    {{$course->code}} - S{{$course->semester}}
                                 </option>
                             @endforeach
                         </select>

@@ -39,9 +39,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center">
                 <div class="w-full p-10 flex justify-center flex-wrap">
-                    <a href="{{route('schedule.addPage')}}" class="btn">
-                        Add Schedule
-                    </a>
+                    <a href="{{route('schedule.addPage')}}" class="btn"> Add Schedule </a>
                 </div>
                 <table class="w-11/12">
                     <tbody>
@@ -55,8 +53,7 @@
                             <td>Location</td>
                             <td>Instructor</td>
                             <td>Day</td>
-                            <td>Start</td>
-                            <td colspan="2">End</td>
+                            <td colspan="2">Time</td>
 
                         </tr>
                         @foreach ($schedules as $schedule)
@@ -65,17 +62,16 @@
                                     {{ $loop->iteration }}
                                 </td>
 
-                                <td>{{$schedule->course->code}}</td>
-                                <td>{{$schedule->subject->code}}</td>
+                                <td class="text-nowrap">{{$schedule->course->code}} - S{{$schedule->course->semester}}</td>
+                                <td class="text-center">{{$schedule->subject->code}}</td>
                                 <td>{{$schedule->location->name}}</td>
                                 <td class="text-nowrap">{{$schedule->instructor->name}}</td>
                                 <td>{{$schedule->day->name}}</td>
-                                <td>{{$schedule->start}}</td>
-                                <td>{{$schedule->end}}</td>
+                                <td class="text-nowrap">{{$schedule->start}} - {{$schedule->end}}</td>
 
                                 <td class="gap-3 flex">
 
-                                    <a class="btn" href="{{route("schedule.updatePage",['id'=>$schedule->id])}}">Update</a>
+                                    <a class="btn" href="{{route("schedule.updatePage", ['id' => $schedule->id])}}">Update</a>
 
                                     <form class="w-fit" method="POST"
                                         action="{{ route('schedule.delete', ['id' => $schedule->id]) }}">
@@ -88,6 +84,8 @@
                         @endforeach
                     </tbody>
                 </table>
+
+
 
             </div>
         </div>

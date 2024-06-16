@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white flex justify-center  shadow-sm sm:rounded-lg">
+            <div class="bg-white flex items-center flex-col p-5 shadow-sm sm:rounded-lg">
                 <form class="user-form w-full lg:w-1/2 flex flex-col p-5 gap-5" method="POST"
                     action="{{ route('user.update', $user->id)}}">
                     @csrf
@@ -53,46 +53,39 @@
                     </div>
 
                     <div>
-                        <label for="batch">
-                            Batch:
-                        </label>
-                        <input type="text" id="batch" name="batch" value="{{ $user->batch_id }}">
-                    </div>
-
-                    <div>
-
-
-                        <!-- Waiting for next update -->
-                        {{-- <label for="batch_id">
+                        <label for="batch_id">
                             Batch:
                         </label>
                         <select id="batch_id" name="batch_id" required>
                             @foreach ($batches as $batch)
-                            <option value="{{ $batch->id }}" {{ $user->batch_id == $batch->id ? 'selected' : '' }}>
-                                {{ $batch->intake }}</option>
+                                <option value="{{ $batch->id }}" {{ $user->batch_id == $batch->id ? 'selected' : '' }}>
+                                    {{ $batch->intake }}
+                                </option>
                             @endforeach
                         </select>
+                    </div>
 
+                    <div>
                         <label for="course_id">
                             Course:
                         </label>
                         <select id="course_id" name="course_id" required>
                             @foreach ($courses as $course)
-                            <option value="{{ $course->id }}" {{ $user->course_id == $course->id ? 'selected' : '' }}>
-                                {{ $course->code }}</option>
+                                <option value="{{ $course->id }}" {{ $user->course_id == $course->id ? 'selected' : '' }}>
+                                    {{ $course->code }}
+                                </option>
                             @endforeach
-                        </select> --}}
+                        </select>
+                    </div>
 
-                        <div class="flex w-full gap-2" style="flex-direction: row">
-                            <input type="submit" value="Update">
+                    <div class="flex justify-center w-full pt-3" style="flex-direction: row">
+                        <input type="submit" value="Update">
+                    </div>
 
-
-
-                        </div>
 
                 </form>
 
-                <form class="w-fit pt-3" method="DELETE" action="{{route('user.delete', ['id' => $user->id])}}">
+                <form class="w-fit" method="DELETE" action="{{route('user.delete', ['id' => $user->id])}}">
                     @csrf
                     @method('DELETE')
                     <input class="btn dlt" type="submit" value="Remove User">
