@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->string('user_type')->default('student')->change();
             $table->string('matric_no')->unique()->nullable();
             $table->string('phone_no')->nullable();
-            $table->foreignId('batch_id')->nullable()->constrained('batches')->onDelete('cascade');
-            $table->foreignId('course_id')->nullable()->constrained('courses')->onDelete('cascade');
+            $table->foreignId('batch_id')->nullable()->constrained('batches')->onDelete('set null');
+            $table->foreignId('course_id')->nullable()->constrained('courses')->onDelete('set null');
         });
     }
 
