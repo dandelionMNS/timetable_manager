@@ -35,11 +35,11 @@ Route::middleware('auth')->group(function () {
 
 // Subjects related routes
 {
-        Route::get('/subject', [SubjectController::class, 'index'])->middleware(['auth', 'verified'])->name('subject.index');
-        Route::post('/subject/add', [SubjectController::class, 'subjectAdd'])->middleware(['auth', 'verified'])->name('subject.add');
-        Route::put('/subject/{id}/update', [SubjectController::class, 'subjectUpdate'])->middleware(['auth', 'verified'])->name('subject.update');
-        Route::delete('/subject/{id}/delete', [SubjectController::class, 'subjectDelete'])->middleware(['auth', 'verified'])->name('subject.delete');
-    
+    Route::get('/subject', [SubjectController::class, 'index'])->middleware(['auth', 'verified'])->name('subject.index');
+    Route::post('/subject/add', [SubjectController::class, 'subjectAdd'])->middleware(['auth', 'verified'])->name('subject.add');
+    Route::put('/subject/{id}/update', [SubjectController::class, 'subjectUpdate'])->middleware(['auth', 'verified'])->name('subject.update');
+    Route::delete('/subject/{id}/delete', [SubjectController::class, 'subjectDelete'])->middleware(['auth', 'verified'])->name('subject.delete');
+
 }
 
 // Classsroom related routes
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
 {
     Route::get('/schedule', [ScheduleController::class, 'index'])->middleware(['auth', 'verified'])->name('schedule.index');
     Route::get('/schedule/course/{id}', [ScheduleController::class, 'tableCourse'])->middleware(['auth', 'verified'])->name('schedule.tableCourse');
-    Route::get('/schedule/teacher/{id}', [ScheduleController::class, 'tableTeacher'])->middleware(['auth', 'verified'])->name('schedule.tableTeacher'); 
+    Route::get('/schedule/teacher/{id}', [ScheduleController::class, 'tableTeacher'])->middleware(['auth', 'verified'])->name('schedule.tableTeacher');
 
     Route::get('/schedule/add', [ScheduleController::class, 'scheduleAddPage'])->middleware(['auth', 'verified'])->name('schedule.addPage');
     Route::post('/schedule/added', [ScheduleController::class, 'scheduleAdd'])->middleware(['auth', 'verified'])->name('schedule.add');
@@ -85,4 +85,9 @@ Route::middleware('auth')->group(function () {
 
 }
 
+// API
+{
+    Route::get('api/schedule/', [ScheduleController::class, 'getData'])->middleware(['auth', 'verified'])->name('schedule.data');
+    Route::get('api/schedule/course/{id}', [ScheduleController::class, 'tableCourseData'])->middleware(['auth', 'verified'])->name('schedule.data');
+}
 require __DIR__ . '/auth.php';

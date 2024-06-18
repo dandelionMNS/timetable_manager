@@ -11,7 +11,8 @@
                 <h2 class="text-xl font-semibold">
                     Schedule new class:
                 </h2>
-                <form id="newBatch" class="flex gap-3 flex-col p-5 w-11/12 max-w-xl" method="POST" action="{{ route('schedule.add')}}">
+                <form id="newBatch" class="flex gap-3 flex-col p-5 w-11/12 max-w-xl" method="POST"
+                    action="{{ route('schedule.add')}}">
                     @csrf
 
                     <div class="pb-3">
@@ -24,7 +25,7 @@
                                 <option value="{{$course->id}}">{{$course->code}} - S{{$course->semester}}</option>
                             @endforeach
                         </select>
-                        
+
                     </div>
 
                     <div class="pb-3">
@@ -73,13 +74,25 @@
 
                     <div2 class="flex gap-5 w-full justify-center">
                         <div class="w-1/2">
-                            <label for="start">Start Time:</label>
-                            <input class="w-full" type="time" id="start" name="start" required>
+                            <label for="start_id">
+                                Start Time:
+                            </label>
+                            <select class="w-full" id="start_id" name="start_id">
+                                @foreach ($timeslots as $slot)
+                                    <option value="{{$slot->id}}">{{$slot->time}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="w-1/2">
-                            <label for="end">End Time:</label>
-                            <input class="w-full" type="time" id="end" name="end" required>
+                        <label for="end_id">
+                            End Time:
+                        </label>
+                        <select class="w-full" id="end_id" name="end_id">
+                            @foreach ($timeslots as $slot)
+                                <option value="{{$slot->id}}">{{$slot->time}}</option>
+                            @endforeach
+                        </select>
                         </div>
                     </div2>
 

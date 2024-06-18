@@ -17,8 +17,8 @@ class Schedule extends Model
         "course_id",
         "location_id",
         "day_id",
-        "start",
-        "end",
+        "start_id",
+        "end_id",
     ];
 
     public function subject()
@@ -43,5 +43,13 @@ class Schedule extends Model
     public function day()
     {
         return $this->belongsTo(Day::class);
+    }
+    public function start()
+    {
+        return $this->belongsTo(TimeSlot::class);
+    }
+    public function end()
+    {
+        return $this->belongsTo(TimeSlot::class);
     }
 }

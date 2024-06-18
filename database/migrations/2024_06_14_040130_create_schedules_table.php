@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->foreignId('location_id')->constrained('classrooms');
             $table->foreignId('day_id')->constrained('days');
-            $table->time('start');
-            $table->time('end');
+            $table->foreignId('start_id')->constrained('timeslots');
+            $table->foreignId('end_id')->constrained('timeslots');
         });
     }
 

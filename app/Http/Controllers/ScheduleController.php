@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Day;
 use App\Models\Schedule;
 use App\Models\Subject;
+use App\Models\TimeSlot;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,24 +20,27 @@ class ScheduleController extends Controller
         $schedules = Schedule::all();
         return view("admin.schedule", compact("schedules"));
     }
-
+    function getData()
+    {
+        $schedule = Schedule::all();
+        return response()->json($schedule);
+    }
     public function tableCourse($c_id)
     {
         DB::enableQueryLog();
+        $days = Day::all();
         $schedules = Schedule::where('course_id', $c_id)->get();
         $course = Course::findOrFail($c_id);
         $queries = DB::getQueryLog();
 
-        return view("table.course", compact("schedules", 'course'));
+        return view("table.course", compact("schedules", 'course','days'));
     }
 
-    public function tableCourseAddPage($c_id)
+    public function tableCourseData($c_id)
     {
         $schedules = Schedule::where('course_id', $c_id)->get();
-        $course = Course::findOrFail($c_id);
-
-        return view("admin.scheduleAdd", compact("schedules", 'course'));
-    } 
+        return response()->json($schedules);
+    }
 
     public function tableTeacher($u_id)
     {
@@ -46,14 +50,14 @@ class ScheduleController extends Controller
 
     public function scheduleAddPage()
     {
-
         $courses = Course::orderBy('code', 'asc')->get();
         $subjects = Subject::orderBy('code', 'asc')->get();
         $instructors = User::where("user_type", "teacher")->get();
         $locations = Classroom::orderBy('name', 'asc')->get();
         $days = Day::all();
+        $timeslots = TimeSlot::all();
 
-        return view("admin.scheduleAdd", compact("courses", "subjects", "instructors", "locations", "days"));
+        return view("admin.scheduleAdd", compact("courses", "subjects", "instructors", "locations", "days", 'timeslots'));
     }
 
 
@@ -64,10 +68,11 @@ class ScheduleController extends Controller
         $subjects = Subject::orderBy('code', 'asc')->get();
         $instructors = User::where("user_type", "teacher")->get();
         $locations = Classroom::orderBy('name', 'asc')->get();
-        $days = Day::all();
+        $days = Day::all();        
+        $timeslots = TimeSlot::all();
         $schedule = Schedule::findOrFail($id);
 
-        return view("admin.scheduleUpdate", compact("courses", "subjects", "instructors", "locations", "days", "schedule"));
+        return view("admin.scheduleUpdate", compact("courses", "subjects", "instructors", "locations", "days", 'timeslots', "schedule"));
     }
 
     public function scheduleAdd(Request $request)
@@ -79,8 +84,8 @@ class ScheduleController extends Controller
         $schedule->instructor_id = $request->input("instructor_id");
         $schedule->location_id = $request->input("location_id");
         $schedule->day_id = $request->input("day_id");
-        $schedule->start = $request->input("start");
-        $schedule->end = $request->input("end");
+        $schedule->start_id = $request->input("start_id");
+        $schedule->end_id = $request->input("end_id");
         $schedule->save();
 
         return redirect()->route('schedule.index');
@@ -94,8 +99,8 @@ class ScheduleController extends Controller
         $schedule->instructor_id = $request->input("instructor_id");
         $schedule->location_id = $request->input("location_id");
         $schedule->day_id = $request->input("day_id");
-        $schedule->start = $request->input("start");
-        $schedule->end = $request->input("end");
+        $schedule->start_id = $request->input("start_id");
+        $schedule->end_id = $request->input("end_id");
         $schedule->save();
 
         return redirect()->route('schedule.index');
@@ -113,7 +118,7 @@ class ScheduleController extends Controller
     {
 
         $schedule = Schedule::findOrFail($s_id);
-        $schedule->delete(); 
+        $schedule->delete();
 
         return redirect()->route('schedule.tableCourse', ['c_id' => $id]);
     }

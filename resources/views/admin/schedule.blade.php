@@ -67,7 +67,7 @@
                                 <td>{{$schedule->location->name}}</td>
                                 <td class="text-nowrap">{{$schedule->instructor->name}}</td>
                                 <td>{{$schedule->day->name}}</td>
-                                <td class="text-nowrap">{{$schedule->start}} - {{$schedule->end}}</td>
+                                <td class="text-nowrap">{{$schedule->start->time}} - {{$schedule->end->time}}</td>
 
                                 <td class="gap-3 flex">
 
