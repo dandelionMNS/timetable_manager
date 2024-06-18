@@ -82,7 +82,7 @@
                             </label>
                             <select class="w-full" id="start_id" name="start_id">
                                 @foreach ($timeslots as $slot)
-                                    <option value="{{$slot->id}}">{{$slot->time}}</option>
+                                    <option value="{{$slot->id}}" {{$slot->id == $schedule->start->id ? 'selected' : '' }}>{{$slot->time}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -93,7 +93,7 @@
                         </label>
                         <select class="w-full" id="end_id" name="end_id">
                             @foreach ($timeslots as $slot)
-                                <option value="{{$slot->id}}">{{$slot->time}}</option>
+                                <option value="{{$slot->id}}" {{$slot->id == $schedule->end->id ? 'selected' : '' }}>{{$slot->time}}</option>
                             @endforeach
                         </select>
                         </div>

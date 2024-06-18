@@ -28,12 +28,13 @@ class ScheduleController extends Controller
     public function tableCourse($c_id)
     {
         DB::enableQueryLog();
-        $days = Day::all();
         $schedules = Schedule::where('course_id', $c_id)->get();
         $course = Course::findOrFail($c_id);
+        $days = Day::all();
+        $timeslots = TimeSlot::all();
         $queries = DB::getQueryLog();
 
-        return view("table.course", compact("schedules", 'course','days'));
+        return view("table.course", compact("schedules", 'course', 'days', 'timeslots'));
     }
 
     public function tableCourseData($c_id)
@@ -60,15 +61,13 @@ class ScheduleController extends Controller
         return view("admin.scheduleAdd", compact("courses", "subjects", "instructors", "locations", "days", 'timeslots'));
     }
 
-
     public function scheduleUpdatePage($id)
     {
-
         $courses = Course::orderBy('code', 'asc')->get();
         $subjects = Subject::orderBy('code', 'asc')->get();
         $instructors = User::where("user_type", "teacher")->get();
         $locations = Classroom::orderBy('name', 'asc')->get();
-        $days = Day::all();        
+        $days = Day::all();
         $timeslots = TimeSlot::all();
         $schedule = Schedule::findOrFail($id);
 

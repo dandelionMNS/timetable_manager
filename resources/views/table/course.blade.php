@@ -26,8 +26,23 @@
             input {
                 min-width: 100px;
             }
+
+
         }
     </style>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth'
+            });
+            calendar.render();
+        });
+
+    </script>
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -37,8 +52,50 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center">
-                <div class="timetable"></div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center ">
+                <div class="timetable">
+                    <table>
+                        <thead>
+                            <tr>                                
+                                @foreach ($timeslots as $slot)
+                                    <th>{{ $slot->time }}</th>
+                                @endforeach
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for ($i = 1; $i <= 7; $i++)
+                                                <tr>
+                                                    <td>{{ $days[$i - 1]->name }}</td>
+                                                    @for ($j = 1; $j <= count($timeslots); $j++)
+                                                                            @php
+                                                                                $found = false;
+                                                                            @endphp
+                                                                            @foreach ($schedules as $schedule)
+                                                                                            @if ($schedule->day_id == $i && $schedule->start_id == $j)
+                                                                                                            @php
+                                                                                                                $found = true;
+                                                                                                                // Adjust colspan to span only to the slot before end_id
+                                                                                                                $colspan = $schedule->end_id - $schedule->start_id;
+                                                                                                            @endphp
+                                                                                                            <td colspan="{{ $colspan }}">
+                                                                                                                {{ $schedule->subject->name }} <br><strong>{{ $schedule->instructor->name }}</strong>
+                                                                                                            </td>
+                                                                                                            @for ($k = 1; $k < $colspan; $k++)
+                                                                                                                @php                    $j++; @endphp
+                                                                                                            @endfor
+                                                                                            @endif
+                                                                            @endforeach
+                                                                            @if (!$found)
+                                                                                <td></td>
+                                                                            @endif
+                                                    @endfor
+                                                </tr>
+                            @endfor
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -75,16 +132,14 @@
                                 <td class="text-center">{{$schedule->location->name}}</td>
                                 <td class="text-nowrap text-center">{{$schedule->instructor->name}}</td>
                                 <td class="text-center">{{$schedule->day->name}}</td>
-                                <td class="text-nowrap text-center">{{$schedule->start}} - {{$schedule->end}}</td>
+                                <td class="text-nowrap text-center">{{$schedule->start->time}} - {{$schedule->end->time}}</td>
 
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-
-
-
             </div>
         </div>
     </div>
+
 </x-app-layout>
