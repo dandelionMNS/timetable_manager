@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Batch;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -12,33 +15,48 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-     // Teacher/Student Related Details
+    // Teacher/Student Related Details
 
-     public function index()
-     {
-         if (auth()->user()->user_type == "admin") {
-             $users = User::all();
- 
-             return view("admin.user", compact("users"));
-         } else {
-             return view('welcome');
-         }
-     }
+    public function index()
+    {
+        if (auth()->user()->user_type == "admin") {
+            $users = User::all();
 
-     public function userDetail($id)
-     {
-         $user = User::findOrFail($id);        
-         return view('admin.userDetails', compact("user"));
-     }
- 
- 
-     public function userUpdate(Request $request, $id)
-     {
+            return view("admin.user", compact("users"));
+        } else {
+            return view('welcome');
+        }
+    }
 
-        if(!User::findOrFail($id)){
+    public function listTeachers()
+    {
+        $users = User::where('user_type', 'teacher')->get();
+        return view("admin.user", compact("users"));
+
+    }
+    public function listStudents()
+    {
+        $users = User::where('user_type', 'student')->get();
+        return view("admin.user", compact("users"));
+
+    }
+
+    public function userDetail($id)
+    {
+        $user = User::findOrFail($id);
+        $courses = Course::all();
+        $batches = Batch::all();
+        return view('admin.userDetails', compact("user", "courses", "batches"));
+    }
+
+
+    public function userUpdate(Request $request, $id)
+    {
+
+        if (!User::findOrFail($id)) {
             return view("dashboard");
         }
-        
+
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -46,18 +64,24 @@ class UserController extends Controller
         $user->phone_no = $request->input('phone_no');
         $user->batch_id = $request->input('batch_id');
         $user->matric_no = $request->input('matric_no');
+        $user->course_id = $request->input('course_id');
         $user->save();
 
-     
-         return view('admin.userDetails', compact('user'));
-     }
+        $courses = Course::all();
+        $batches = Batch::all();
+        $users = User::all();
 
-     public function userDelete($id){
+
+        return redirect()->route('user.details', ['id' => $user, 'users' => $users, 'courses' => $courses, 'batches' => $batches]);
+    }
+
+    public function userDelete($id)
+    {
         $user = User::findOrFail($id);
         $user->delete();
 
         $users = User::all();
         return view('admin.user', compact('users'));
 
-     } 
+    }
 }

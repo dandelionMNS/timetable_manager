@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class assigned_class extends Model
+class Schedule extends Model
 {
     use HasFactory;
 
@@ -18,8 +17,8 @@ class assigned_class extends Model
         "course_id",
         "location_id",
         "day_id",
-        "time_start",
-        "time_end",
+        "start_id",
+        "end_id",
     ];
 
     public function subject()
@@ -45,5 +44,12 @@ class assigned_class extends Model
     {
         return $this->belongsTo(Day::class);
     }
-
+    public function start()
+    {
+        return $this->belongsTo(TimeSlot::class);
+    }
+    public function end()
+    {
+        return $this->belongsTo(TimeSlot::class);
+    }
 }

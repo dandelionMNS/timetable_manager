@@ -16,6 +16,7 @@
         <script src="https://cdn.tailwindcss.com"></script>      
           
         <link rel="stylesheet" href="{{asset('styles.css')}}" />
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

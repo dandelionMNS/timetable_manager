@@ -56,3 +56,21 @@ select,
     display: flex;
     flex-direction: column;
 }
+
+.timetable {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    overflow-x: scroll !important;
+    padding: 20px;
+
+    th{
+        transform: translateX(50%);
+    }
+
+    td {
+        border: 1px #000 solid;
+        padding: 5px 10px !important;
+        width: 100px;
+    }
+}

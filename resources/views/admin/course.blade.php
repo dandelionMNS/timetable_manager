@@ -83,7 +83,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <a class="btn text-nowrap h-full text-lg" href="{{route('ac.index',['c_id'=>$course->id])}}">Assigning Class</a>
+                                    <a class="btn text-nowrap h-full text-lg" href="{{route('schedule.tableCourse', ['id'=>$course->id])}}">Scheduled Class</a>
                                 </td>
 
                                 <td>

@@ -43,6 +43,9 @@
                         <x-dropdown-link :href="route('course.index')">
                             Course
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('schedule.index')">
+                            Schedule
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('batch.index')">
                             Batch
                         </x-dropdown-link>

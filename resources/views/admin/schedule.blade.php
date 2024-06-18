@@ -20,7 +20,7 @@
             color: white;
         }
 
-        #newCourse {
+        #newBatch {
             flex-wrap: wrap;
 
             input {
@@ -31,7 +31,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Assigned Class for {{$course->id}} Semester {{$course->semester}}
+            Scheduled Class
         </h2>
     </x-slot>
 
@@ -39,8 +39,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center">
                 <div class="w-full p-10 flex justify-center flex-wrap">
-
-                    <a href="{{route('ac.addPage', ['c_id' => $course->id])}}" class="btn "> Assgining new class</a>
+                    <a href="{{route('schedule.addPage')}}" class="btn"> Add Schedule </a>
                 </div>
                 <table class="w-11/12">
                     <tbody>
@@ -49,30 +48,33 @@
                         </div>
                         <tr>
                             <td>No.</td>
+                            <td>Course</td>
                             <td>Subject</td>
-                            <td>Instructor</td>
                             <td>Location</td>
+                            <td>Instructor</td>
+                            <td>Day</td>
+                            <td colspan="2">Time</td>
+
                         </tr>
-                        @foreach ($assigned_classes as $assigned_class)
+                        @foreach ($schedules as $schedule)
                             <tr>
                                 <td class="w-min">
                                     {{ $loop->iteration }}
                                 </td>
 
-                                <td>
-                                    {{$assigned_class->subject->name}}
-                                </td>
-
-                                <td class="w-full">
-                                    {{$assigned_class->instructor->name}}
-                                </td>
+                                <td class="text-nowrap">{{$schedule->course->code}} - S{{$schedule->course->semester}}</td>
+                                <td class="text-center">{{$schedule->subject->code}}</td>
+                                <td>{{$schedule->location->name}}</td>
+                                <td class="text-nowrap">{{$schedule->instructor->name}}</td>
+                                <td>{{$schedule->day->name}}</td>
+                                <td class="text-nowrap">{{$schedule->start->time}} - {{$schedule->end->time}}</td>
 
                                 <td class="gap-3 flex">
-                                </td>
 
-                                <td>
+                                    <a class="btn" href="{{route("schedule.updatePage", ['id' => $schedule->id])}}">Update</a>
+
                                     <form class="w-fit" method="POST"
-                                        action="{{ route('ac.testDelete', ['id' => $assigned_class->id, 'c_id' => $course->id])}}">
+                                        action="{{ route('schedule.delete', ['id' => $schedule->id]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <input class="btn dlt" type="submit" value="Remove">
@@ -82,6 +84,9 @@
                         @endforeach
                     </tbody>
                 </table>
+
+
+
             </div>
         </div>
     </div>
