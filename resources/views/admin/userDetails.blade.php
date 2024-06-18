@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white flex items-center flex-col p-5 shadow-sm sm:rounded-lg">
                 <form class="user-form w-full lg:w-1/2 flex flex-col p-5 gap-5" method="POST"
-                    action="{{ route('user.update', $user->id)}}">
+                    action="{{ route('user.update', ['id'=>$user->id])}}">
                     @csrf
                     @method('PUT')
 

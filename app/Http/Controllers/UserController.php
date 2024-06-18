@@ -28,12 +28,25 @@ class UserController extends Controller
         }
     }
 
+    public function listTeachers()
+    {
+        $users = User::where('user_type', 'teacher')->get();
+        return view("admin.user", compact("users"));
+
+    }
+    public function listStudents()
+    {
+        $users = User::where('user_type', 'student')->get();
+        return view("admin.user", compact("users"));
+
+    }
+
     public function userDetail($id)
     {
-        $user = User::findOrFail($id);        
+        $user = User::findOrFail($id);
         $courses = Course::all();
         $batches = Batch::all();
-        return view('admin.userDetails', compact("user","courses","batches"));
+        return view('admin.userDetails', compact("user", "courses", "batches"));
     }
 
 
@@ -51,13 +64,15 @@ class UserController extends Controller
         $user->phone_no = $request->input('phone_no');
         $user->batch_id = $request->input('batch_id');
         $user->matric_no = $request->input('matric_no');
+        $user->course_id = $request->input('course_id');
         $user->save();
 
         $courses = Course::all();
         $batches = Batch::all();
+        $users = User::all();
 
 
-        return view('admin.userDetails', compact('user', 'courses', 'batches'));
+        return redirect()->route('user.details', ['id' => $user, 'users' => $users, 'courses' => $courses, 'batches' => $batches]);
     }
 
     public function userDelete($id)
