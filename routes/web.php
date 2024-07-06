@@ -35,8 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/teachers', [UserController::class, 'listTeachers'])->middleware(['auth', 'verified'])->name('admin.teacher');
     Route::get('/user/students', [UserController::class, 'listStudents'])->middleware(['auth', 'verified'])->name('admin.student');
 
-
+    
+    Route::get('/user/add', [UserController::class, 'userAddPage'])->middleware(['auth', 'verified'])->name('admin.userAddPage');
+    Route::post('/user/added', [UserController::class, 'userAdd'])->middleware(['auth', 'verified'])->name('user.add');
     Route::get('/user/admin/{id}', [UserController::class, 'adminDetail'])->middleware(['auth', 'verified'])->name('admin.userDetails');
+
     Route::get('/user/{id}', [UserController::class, 'userDetail'])->middleware(['auth', 'verified'])->name('user.userDetails');
 
     Route::put('/user/{id}/update', [UserController::class, 'userUpdate'])->middleware(['auth', 'verified'])->name('admin.update');
