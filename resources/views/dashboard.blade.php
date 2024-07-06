@@ -129,6 +129,43 @@
                             <a class="flex justify-center items-center p-5 btns w-fit"
                                 href="{{ route('student.table') }}">Check Your Timetable</a>
                             <a class="flex justify-center items-center p-5 btns w-fit"
+                                href="{{ route('user.add', ['id' => auth()->user()->id]) }}">Check Your
+                                Information
+                                Details</a>
+                        </div>
+
+                    </div>
+                    <div class="">
+                        <img src="{{ asset('assets/images/dashboard_img.png') }}">
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    @elseif (auth()->user() && auth()->user()->user_type == 'teacher')
+        <div class="py-12">
+            <div class="max-w-7xl bg-white  flex flex-col items-center mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden p-5 shadow-sm sm:rounded-lg flex flex-col items-center">
+                    <h1 class="text-3xl font-semibold">Welcome back, {{ auth()->user()->name }}</h1>
+                </div>
+
+                <div class="grid bg-white grid-cols-2 h-full my-5 rounded-xl flex-wrap justify-center w-11/12 "
+                    style="min-height:65vh;">
+                    <div class="flex justify-center items-center flex-col">
+                        <h1 class="text-blue-900 text-4xl font-bold py-5">
+                            Streamlined Scheduling
+                        </h1>
+                        <p class="text-blue-700 font-semibold text-center">Simplifying schedule management by providing
+                            real-time
+                            data and advanced automation for a smoother and more efficient operation.</p>
+
+                        <div class="p-5 gap-5 w-full justify-center flex">
+                            <a class="flex justify-center items-center p-5 btns w-fit"
+                                href="{{ route('student.table') }}">Check Your Timetable</a>
+                            <a class="flex justify-center items-center p-5 btns w-fit"
                                 href="{{ route('user.userDetails', ['id' => auth()->user()->id]) }}">Check Your
                                 Information
                                 Details</a>
