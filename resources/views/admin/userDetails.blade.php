@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white flex items-center flex-col p-5 shadow-sm sm:rounded-lg">
                 <form class="user-form w-full lg:w-1/2 flex flex-col p-5 gap-5" method="POST"
-                    action="{{ route('user.update', ['id'=>$user->id])}}">
+                    action="{{ route('admin.update', ['id' => $user->id]) }}">
                     @csrf
                     @method('PUT')
 
@@ -25,8 +25,10 @@
                             User Type:
                         </label>
                         <select class="input" id="user_type" name="user_type" required>
-                            <option value="teacher" {{ $user->user_type == 'teacher' ? 'selected' : '' }}>Teacher</option>
-                            <option value="student" {{ $user->user_type == 'student' ? 'selected' : '' }}>Student</option>
+                            <option value="teacher" {{ $user->user_type == 'teacher' ? 'selected' : '' }}>Teacher
+                            </option>
+                            <option value="student" {{ $user->user_type == 'student' ? 'selected' : '' }}>Student
+                            </option>
                         </select>
                     </div>
 
@@ -57,8 +59,12 @@
                             Batch:
                         </label>
                         <select id="batch_id" name="batch_id" required>
+                            <option value="">
+                                null
+                            </option>
                             @foreach ($batches as $batch)
-                                <option value="{{ $batch->id }}" {{ $user->batch_id == $batch->id ? 'selected' : '' }}>
+                                <option value="{{ $batch->id }}"
+                                    {{ $user->batch_id == $batch->id ? 'selected' : '' }}>
                                     {{ $batch->intake }}
                                 </option>
                             @endforeach
@@ -70,9 +76,13 @@
                             Course:
                         </label>
                         <select id="course_id" name="course_id" required>
+                            <option value="">
+                                null
+                            </option>
                             @foreach ($courses as $course)
-                                <option value="{{ $course->id }}" {{ $user->course_id == $course->id ? 'selected' : '' }}>
-                                    {{ $course->code }}
+                                <option value="{{ $course->id }}"
+                                    {{ $user->course_id == $course->id ? 'selected' : '' }}>
+                                    {{ $course->code }} - Semester {{ $course->semester }}
                                 </option>
                             @endforeach
                         </select>
@@ -85,7 +95,7 @@
 
                 </form>
 
-                <form class="w-fit" method="DELETE" action="{{route('user.delete', ['id' => $user->id])}}">
+                <form class="w-fit" method="DELETE" action="{{ route('admin.delete', ['id' => $user->id]) }}">
                     @csrf
                     @method('DELETE')
                     <input class="btn dlt" type="submit" value="Remove User">

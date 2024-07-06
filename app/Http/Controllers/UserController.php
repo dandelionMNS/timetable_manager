@@ -41,7 +41,7 @@ class UserController extends Controller
 
     }
 
-    public function userDetail($id)
+    public function adminDetail($id)
     {
         $user = User::findOrFail($id);
         $courses = Course::all();
@@ -72,7 +72,7 @@ class UserController extends Controller
         $users = User::all();
 
 
-        return redirect()->route('user.details', ['id' => $user, 'users' => $users, 'courses' => $courses, 'batches' => $batches]);
+        return redirect()->route('admin.userDetails', ['id' => $user, 'users' => $users, 'courses' => $courses, 'batches' => $batches]);
     }
 
     public function userDelete($id)
@@ -83,5 +83,16 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.user', compact('users'));
 
+    }
+
+
+    //User Hadnling
+
+    public function userDetail($id)
+    {
+        $user = User::findOrFail($id);
+        $courses = Course::all();
+        $batches = Batch::all();
+        return view('user.userDetails', compact("user", "courses", "batches"));
     }
 }
