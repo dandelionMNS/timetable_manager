@@ -21,7 +21,7 @@
                         <td class="w-min text-nowrap">User Type</td>
                         <td class="w-min text-nowrap">Matrix No</td>
                         @unless (Route::is('admin.teacher'))
-                            <td class="w-fit">Course</td>
+                            <td class="w-fit">Class</td>
                             <td class="w-fit">Batch</td>
                         @endunless
                         <td class="w-full">Name</td>

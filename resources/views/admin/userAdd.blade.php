@@ -75,9 +75,7 @@
                     </div>
 
                     <div>
-                        <label for="course_id">
-                            Course:
-                        </label>
+                        <label for="course_id">Class:</label>
                         <select id="course_id" name="course_id">
                             <option value="">
                                 null

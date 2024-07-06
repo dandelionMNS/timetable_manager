@@ -102,7 +102,7 @@
                         </div>
                         <tr>
                             <td class="text-center">No.</td>
-                            <td class="text-center">Course</td>
+                            <td class="text-center">Class</td>
                             <td class="text-center">Subject</td>
                             <td class="text-center">Location</td>
                             <td class="text-center">Instructor</td>

@@ -17,9 +17,7 @@
                     @method('PUT')
 
                     <div class="pb-3">
-                        <label for="course_id">
-                            Course:
-                        </label>
+                        <label for="course_id">Class:</label>
                         <select class="w-full" id="course_id" name="course_id">
                             @foreach ($courses as $course)
                                 <option value="{{ $course->id }}"
